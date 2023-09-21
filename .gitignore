@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Stereograph.TechnicalTest.Api/testtechnique.db
+/Stereograph.TechnicalTest.Api/testtechnique.db-shm
+/Stereograph.TechnicalTest.Api/testtechnique.db-wal
