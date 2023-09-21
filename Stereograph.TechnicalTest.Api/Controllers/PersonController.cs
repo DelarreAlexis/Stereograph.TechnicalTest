@@ -56,4 +56,26 @@ public class PersonController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = person.Id }, person);
     }
 
+    [HttpPut("{id}")]
+    public IActionResult Update(int id, [FromBody]Person person)
+    {
+        if(person == null)
+            return BadRequest();
+
+        if (!_personRepository.Exist(id))
+            return NotFound();
+
+        Person newPerson = new()
+        {
+            FirstName = person.FirstName,
+            LastName = person.LastName,
+            Email = person.Email,
+            City = person.City,
+            Address = person.Address,
+        };
+
+        _personRepository.Update(person);
+        return Ok(newPerson);
+    }
+
 }

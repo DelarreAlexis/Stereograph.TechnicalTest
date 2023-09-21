@@ -12,6 +12,7 @@ namespace Stereograph.TechnicalTest.Api.Repository
         void Delete(int id);
         void Create(Person person);
         bool Exist(int id);
+        void Update(Person person);
     }
 
     public class PersonRepository: IPersonRepository
@@ -49,6 +50,12 @@ namespace Stereograph.TechnicalTest.Api.Repository
         public bool Exist(int id)
         {
             return _context.Persons.Any(person => person.Id == id);
+        }
+
+        public void Update(Person person)
+        {
+            _context.Update(person);
+            _context.SaveChanges();
         }
 
         public bool IsEmptyTable()

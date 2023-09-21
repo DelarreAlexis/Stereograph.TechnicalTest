@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using System.Xml.Linq;
 
 namespace Stereograph.TechnicalTest.Api.Models
@@ -9,6 +10,7 @@ namespace Stereograph.TechnicalTest.Api.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Display(Name = "id")]
+        [JsonIgnore]
         public int Id { get; set; }
 
         [Display(Name = "last_name")]
