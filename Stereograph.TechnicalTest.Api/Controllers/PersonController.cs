@@ -37,11 +37,23 @@ public class PersonController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        if (_personRepository.Delete(id))
-            return Ok();
-        return NotFound();
+        if (!_personRepository.Exist(id))
+            return NotFound();
+
+        return Ok();
     }
 
+    [HttpPost]
+    public IActionResult Create([FromBody]Person person)
+    {
+        if(person == null)
+            return BadRequest();
 
+        if(_personRepository.Exist(person.Id))
+            return Conflict();
+
+        _personRepository.Create(person);
+        return CreatedAtAction(nameof(GetById), new { id = person.Id }, person);
+    }
 
 }

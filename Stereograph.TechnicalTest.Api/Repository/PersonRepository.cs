@@ -9,7 +9,9 @@ namespace Stereograph.TechnicalTest.Api.Repository
         bool IsEmptyTable();
         List<Person> GetAll();
         Person Get(int id);
-        bool Delete(int id);
+        void Delete(int id);
+        void Create(Person person);
+        bool Exist(int id);
     }
 
     public class PersonRepository: IPersonRepository
@@ -31,14 +33,22 @@ namespace Stereograph.TechnicalTest.Api.Repository
             return _context.Persons.Where(person => person.Id == id).FirstOrDefault();
         }
 
-        public bool Delete(int id)
+        public void Delete(int id)
         {
             Person person = Get(id);
-            if (person == null)
-                return false;
             _context.Persons.Remove(person);
             _context.SaveChanges();
-            return true;
+        }
+
+        public void Create(Person person)
+        {
+            _context.Persons.Add(person);
+            _context.SaveChanges();
+        }
+
+        public bool Exist(int id)
+        {
+            return _context.Persons.Any(person => person.Id == id);
         }
 
         public bool IsEmptyTable()
