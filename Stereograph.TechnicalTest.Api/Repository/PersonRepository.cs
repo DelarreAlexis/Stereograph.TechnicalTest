@@ -1,4 +1,5 @@
-﻿using Stereograph.TechnicalTest.Api.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Stereograph.TechnicalTest.Api.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,6 +10,9 @@ namespace Stereograph.TechnicalTest.Api.Repository
         bool IsEmptyTable();
         List<Person> GetAll();
         Person Get(int id);
+        Person GetWithFollowersAndFollowings(int id);
+        Person GetWithFollowers(int id);
+        Person GetWithFollowings(int id);
         void Delete(int id);
         void Create(Person person);
         bool Exist(int id);
@@ -32,6 +36,21 @@ namespace Stereograph.TechnicalTest.Api.Repository
         public Person Get(int id)
         {
             return _context.Persons.Where(person => person.Id == id).FirstOrDefault();
+        }
+
+        public Person GetWithFollowersAndFollowings(int id)
+        {
+            return _context.Persons.Include(p => p.Followers).Include(p => p.Followings).FirstOrDefault(p => p.Id == id);
+        }
+
+        public Person GetWithFollowers(int id)
+        {
+            return _context.Persons.Include(p=>p.Followers).FirstOrDefault(p=>p.Id == id);
+        }
+
+        public Person GetWithFollowings(int id)
+        {
+            return _context.Persons.Include(p => p.Followings).FirstOrDefault(p => p.Id == id);
         }
 
         public void Delete(int id)

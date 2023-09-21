@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using System.Xml.Linq;
@@ -27,5 +28,8 @@ namespace Stereograph.TechnicalTest.Api.Models
 
         [Display(Name = "city")]
         public string City { get; set; }
+
+        public List<PersonFollow> Followers { get; set; } = new List<PersonFollow>();
+        public List<PersonFollow> Followings { get; set; } = new List<PersonFollow>();
     }
 }
