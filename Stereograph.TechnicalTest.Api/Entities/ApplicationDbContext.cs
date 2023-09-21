@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
 namespace Stereograph.TechnicalTest.Api.Models;
 
 public class ApplicationDbContext : DbContext
